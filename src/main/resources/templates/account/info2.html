@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Customer Profile</title>
+
+	<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<style>
+
+body{
+    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+}
+.emp-profile{
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: #fff;
+}
+.profile-img{
+    text-align: center;
+}
+.profile-img img{
+    width: 70%;
+    height: 100%;
+}
+.profile-img .file {
+    position: relative;
+    overflow: hidden;
+    margin-top: -20%;
+    width: 70%;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+    background: #212529b8;
+}
+.profile-img .file input {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+.profile-head h5{
+    color: #333;
+}
+.profile-head h6{
+    color: #0062cc;
+}
+.profile-edit-btn{
+    border: none;
+    border-radius: 1.5rem;
+    width: 70%;
+    padding: 2%;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
+}
+.proile-rating{
+    font-size: 12px;
+    color: #818182;
+    margin-top: 5%;
+}
+.proile-rating span{
+    color: #495057;
+    font-size: 15px;
+    font-weight: 600;
+}
+.profile-head .nav-tabs{
+    margin-bottom:5%;
+}
+.profile-head .nav-tabs .nav-link{
+    font-weight:600;
+    border: none;
+}
+.profile-head .nav-tabs .nav-link.active{
+    border: none;
+    border-bottom:2px solid #0062cc;
+}
+.profile-work{
+    padding: 14%;
+    margin-top: -15%;
+}
+.profile-work p{
+    font-size: 12px;
+    color: #818182;
+    font-weight: 600;
+    margin-top: 10%;
+}
+.profile-work a{
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 14px;
+}
+.profile-work ul{
+    list-style: none;
+}
+.profile-tab label{
+    font-weight: 600;
+}
+.profile-tab p{
+    font-weight: 600;
+    color: #0062cc;
+}
+
+</style>
+	<body>
+	
+
+<div class="container emp-profile">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <div th:if="${kyctDtl!= null}">
+                            <img th:src=${kyctDtl.customerImg} alt=""/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h5><span th:text="${user.name}"></span></h5>
+                                    <h6>
+                                        <p class="proile-rating">Application Status : <span th:text="${accountDtl.commonDBFields.approvalStatus}"></span></p>
+                                    </h6>
+                                    <div class="row">
+                                    	<div class="col-md-6">
+                                    		<p class="proile-rating">MOBILE : <span th:text="${user.phoneNumber}"></span></p>
+                                    	</div>
+                                    	<div class="col-md-6">
+                                    		<p class="proile-rating">EMAIL : <span th:text="${user.email}"></span></p>
+                                    	</div>
+                                    </div>
+                                    <div class="row">
+                                    	<div class="col-md-6">
+                                    		<p class="proile-rating">FATHER'S NAME : <span th:text="${custDtl.fatherName}"></span></p>
+                                    	</div>
+                                    	<div class="col-md-6">
+                                    		<p class="proile-rating">GENDER : <span th:text="${custDtl.gender}"></span></p>
+                                    	</div>
+                                    </div>
+                                    <div class="row">
+                                    	<div class="col-md-6">
+                                    		<p class="proile-rating">Loan Number : <span th:text="${accountDtl.id}"></span></p>
+                                    	</div>
+                                    	<div class="col-md-6">
+                                    		<p class="proile-rating">Loan Amount : <span th:text="${accountDtl.appliedAmt}"></span> Rs</p>
+                                    	</div>
+                                   </div>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#address" role="tab" aria-controls="profile" aria-selected="false">Address</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#kyc" role="tab" aria-controls="profile" aria-selected="false">Docs</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#employment" role="tab" aria-controls="profile" aria-selected="false">Employment</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#bank" role="tab" aria-controls="profile" aria-selected="false">Bank</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#ref" role="tab" aria-controls="profile" aria-selected="false">Ref.</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#loan" role="tab" aria-controls="profile" aria-selected="false">Loan</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#riskApi" role="tab" aria-controls="profile" aria-selected="false">Risk</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#kycApi" role="tab" aria-controls="profile" aria-selected="false">Pan Kyc</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#adhaarkycApi" role="tab" aria-controls="profile" aria-selected="false">Adhaar Kyc</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#nbfc" role="tab" aria-controls="profile" aria-selected="false">NBFC</a>
+                                </li>
+                                
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-work">
+                        
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="address" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">
+                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Address</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${addressDtl.fullAddress}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>City</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${addressDtl.city}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>State</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${addressDtl.state}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Zip Code</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${addressDtl.zipCode}"></span></p>
+                                            </div>
+                                        </div>
+                                        
+                            </div>
+                            <div class="tab-pane fade" id="employment" role="tabpanel" aria-labelledby="profile-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Employemnt Type</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${employerDtl.employerType}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Employer Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${employerDtl.employerName}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Address</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${employerDtl.fullAddress}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>City</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${employerDtl.city}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>State</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${employerDtl.state}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Zip Code</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${employerDtl.zipCode}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Contact No.</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${employerDtl.employerContactNo}"></span></p>
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="tab-pane fade" id="bank" role="tabpanel" aria-labelledby="profile-tab">
+                                          <div class="row">
+                                            <div class="col-md-4">
+                                               <div class="profile-img">
+					                            <img th:src=${kyctDtl.passBookImg} alt=""/>
+					                            <div class="file btn btn-lg btn-primary">
+                                					Passbook
+                           					 </div>
+					                        </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="profile-img">
+					                            <img th:src=${kyctDtl.cancelCheckImg} alt=""/>
+					                            <div class="file btn btn-lg btn-primary">
+                               					 Cancel Cheque
+                            					</div>
+					                        </div>
+                                            </div>
+                                        </div>
+                                        
+                            </div>
+                            <div class="tab-pane fade" id="ref" role="tabpanel" aria-labelledby="profile-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Reference Name 1</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${refDtl.refName1}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Reference Contact No. 1</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${refDtl.refContactNo1}"></span></p>
+                                            </div>
+                                        </div>
+                                         <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Relation 1</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${refDtl.relation1}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Reference Address 1</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${refDtl.refAddress1}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Reference Name 2</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${refDtl.refName2}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Reference Contact No. 2</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${refDtl.refContactNo2}"></span></p>
+                                            </div>
+                                        </div>
+                                         <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Relation 2</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${refDtl.relation2}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Reference Address 2</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${refDtl.refAddress2}"></span></p>
+                                            </div>
+                                        </div>
+                                        
+                            </div>
+                            <div class="tab-pane fade" id="loan" role="tabpanel" aria-labelledby="profile-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Loan Amount</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${accountDtl.appliedAmt}"></span> Rs</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Loan Duration</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${accountDtl.durationInDays}"></span> Days</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Processing Fees</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${loanCalc.processingFees}"></span> Rs</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Interest Rate</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${loanCalc.interestRate}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Total Amount</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${loanCalc.disbursedAmt}"></span> Rs</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Start Date</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${loanCalc.startDate}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>RePayment Date</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${loanCalc.repaymentDate}"></span></p>
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="tab-pane fade" id="kyc" role="tabpanel" aria-labelledby="profile-tab">
+                                        <div class="row">
+                                            
+                                            <div class="col-md-4">
+                                               <div class="profile-img">
+					                            <img th:src=${kyctDtl.customerImg} alt=""/>
+					                            <div class="file btn btn-lg btn-primary">
+                                					Customer Image
+                           					 </div>
+					                        </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="profile-img">
+					                            <img th:src=${kyctDtl.panCardImg} alt=""/>
+					                            <div class="file btn btn-lg btn-primary">
+                               						PAN Image
+                          						</div>
+					                        </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                               <div class="profile-img">
+					                            <img th:src=${kyctDtl.adhaarFrontImg} alt=""/>
+					                            <div class="file btn btn-lg btn-primary">
+					                                Adhaar Front
+					                            </div>
+					                        </div>
+                                            </div>
+                                            
+                                            <div class="col-md-4">
+                                                <div class="profile-img">
+                           							 <img th:src=${kyctDtl.adhaarBackImg} alt=""/>
+						                            <div class="file btn btn-lg btn-primary">
+						                                Adhaar Back
+						                            </div>
+                        						</div>
+                                            </div>
+                                        </div>
+                            </div>
+                            
+                              <div class="tab-pane fade" id="riskApi" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">  </div>
+                                         <div th:if="${tSRiskScore== null}">Data Not Found.</div>
+                                           <div th:if="${tSRiskScore!= null}">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Consent ID</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${tSRiskScore.data.consentInfo.id}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Verify</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${tSRiskScore.data.other.verify}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Request ID</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${tSRiskScore.data.scoreInfo.requestId}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Telco Code</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${tSRiskScore.data.telcoCode}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Score</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${tSRiskScore.data.scoreInfo.score}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Message</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${tSRiskScore.message}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Verdict</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${tSRiskScore.verdict}"></span></p>
+                                            </div>
+                                        </div>
+                                        </div>
+                            </div>
+                              <div class="tab-pane fade" id="kycApi" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">  </div>
+                                        <div th:if="${panExtraction== null}">Data Not Found.</div>
+                                           <div th:if="${panExtraction!= null}">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Action</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${panExtraction.action}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Group ID</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${panExtraction.groupId}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Request ID</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${panExtraction.requestId}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Task ID</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${panExtraction.taskId}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>First Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${panExtraction.result.sourceOutput.firstName}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Middle Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${panExtraction.result.sourceOutput.middleName}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Last Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${panExtraction.result.sourceOutput.lastName}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Name on Card</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${panExtraction.result.sourceOutput.nameOnCard}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Source</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${panExtraction.result.sourceOutput.source}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>PAN No.</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${panExtraction.result.sourceOutput.idNumber}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Type</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${panExtraction.type}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Status</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${panExtraction.result.sourceOutput.status}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Extract Status</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${panExtraction.status}"></span></p>
+                                            </div>
+                                        </div>
+                                        </div>
+                                                     
+                            </div>
+                            <div class="tab-pane fade" id="adhaarkycApi" role="tabpanel" aria-labelledby="home-tab">
+                                  
+                                        <div class="row"> </div>
+                                        <div th:if="${adhaarExtraction== null}">Data Not Found.</div>
+                                           <div th:if="${adhaarExtraction!= null}">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Full Address</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${adhaarExtraction.result.extraction_output.address}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>DoB</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${adhaarExtraction.result.extraction_output.date_of_birth}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Gender</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${adhaarExtraction.result.extraction_output.gender}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Generated At</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${adhaarExtraction.result.extraction_output.generated_at}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Full Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${adhaarExtraction.result.extraction_output.name}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Reference No.</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${adhaarExtraction.result.extraction_output.reference_number}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Task ID</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${adhaarExtraction.result.extraction_output.task_id}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Task Type</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${adhaarExtraction.result.extraction_output.tast_type}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Status</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${adhaarExtraction.result.extraction_output.status}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Config ID</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${adhaarExtraction.config_id}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Completed At</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${adhaarExtraction.completed_at}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Created At</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${adhaarExtraction.created_at}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Profile ID</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${adhaarExtraction.profile_id}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Reference ID</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${adhaarExtraction.reference_id}"></span></p>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        
+                            </div>
+                            <div class="tab-pane fade" id="nbfc" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row"></div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>CIBIL Score</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${accountDtl.cibilScore}"></span></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Equifax</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p><span th:text="${accountDtl.equifax}"></span></p>
+                                            </div>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+	</body>
+</html>

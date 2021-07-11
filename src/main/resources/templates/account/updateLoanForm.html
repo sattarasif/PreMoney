@@ -1,0 +1,509 @@
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+
+  <!-- Font Awesome icons -->
+  <!-- <script src="https://kit.fontawesome.com/ac7cbd71ce.js" crossorigin="anonymous"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.js" integrity="sha256-2JRzNxMJiS0aHOJjG+liqsEOuBb6++9cY4dSOyiijX4=" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+<!-- adding the PreMoney icon for title bar(V) -->
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/img/logo/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/logo/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/logo/favicon-16x16.png">
+  <link rel="manifest" href="assets/img/logo/site.webmanifest">
+  <link rel="mask-icon" href="assets/img/logo/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* NEW ADDED STYLES */
+
+ .modal-body {
+  height:350px;
+  overflow:auto;
+  }
+
+body {
+  /* background: radial-gradient(rgb(216, 226, 231),rgb(1, 160, 226)); */
+  background: radial-gradient(rgb(129, 194, 203),rgb(102, 196, 208));
+  font-family: "Open Sans", sans-serif !important;
+  color: #444444 !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif; !important;
+  font-weight: 500 !important;
+  color: rgb(2, 97, 136);
+}
+
+label {
+  font-weight: 600 !important;
+}
+input:not([type='file']),select{
+  /* background-color: rgba(244, 244, 244, 0.86) !important;
+  border-radius: 10px !important; */
+  border: none !important;
+  border-bottom: 1px solid rgb(136, 136, 136) !important;
+  outline: none !important;
+
+}
+input:focus{
+    border-bottom: 1px solid rgb(102, 196, 208) !important;
+
+}
+
+input.form-control,input.form-control:focus{
+    border:none;
+    box-shadow: none;
+   -webkit-box-shadow: none;
+   -moz-box-shadow: none;
+   -moz-transition: none;
+   -webkit-transition: none;
+}
+
+table{
+  margin-top: 30px;
+  color: #444444 !important;
+}
+
+svg{
+  font-size: 25px !important;
+}
+
+#main-container {
+  padding: 5% 2% 5% 2%;
+  overflow-x: hidden;
+}
+
+#forms {
+  border-radius: 30px !important;
+}
+
+
+/* navbar */
+.navbar {
+  background: rgba(255, 255, 255, 0.85);
+}
+.logo {
+  font-size: 30px;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.logo a {
+  color: #fff;
+}
+
+.logo img {
+  max-height: 50px;
+}
+
+/* navbar end */
+
+.form-heading {
+  text-align: center;
+
+}
+.form-group{
+  margin-bottom: 0.2rem;
+}
+
+.card-body{
+  padding: 0 !important;
+  margin: 10px 0 5px 0;
+
+}
+
+.error{
+  color: rgb(1, 160, 226);
+  /* color: rgb(102, 196, 208); */
+  /* font-style: italic; */
+  font-size: 16px;
+  /* font-weight: 600 !important; */
+}
+
+
+.form-btn {
+  text-align: center;
+  padding: 0 10% 0 10%;
+  outline: none;
+}
+.form-btn.row {
+  padding: 0 5% 0 5%;
+}
+
+.btn {
+  background-color: rgb(1, 160, 226) !important;
+  /* background-color: rgb(102, 196, 208) !important; */
+  border-radius: 10px !important;
+  outline: none !important;
+}
+.btn:hover {
+  background-color: rgb(6, 131, 184) !important;
+}
+
+
+</style>
+<title>Update Customer</title>
+</head>
+<body>
+
+  <nav class="navbar">
+    <a href="index.html" class="logo mr-auto"><img src="assets/img/Premoney-Text-PNG-NEW1.png" alt="" class="img-fluid"></a>
+  </nav>
+
+<div id="main-container">
+
+  <div class="container">
+    <div class="row justify-content-center">
+                  <div class="col-md-8">
+                      <div class="card shadow p-3 mb-5 bg-white" id="forms">
+                        <div class="">
+                          <button type="button" name="button" class="btn btn-primary back"><i class="fas fa-arrow-left"></i></button>
+                        </div>
+
+                        <!-- PERSONAL INFO FORM -->
+
+                          <div class="card-body">
+                            <div class="form-heading">
+                              <h3 class="card-title">personal_info</h3>
+                            </div>
+
+                              <form class="form-horizontal" role="form" >
+
+                                  <div class="form-group row">
+                                      <!-- <label for="firstName" class="col-sm-3 control-label">Full Name*</label> -->
+                                      <div class="col-sm-6 col-6">
+                                          <input type="text" id="fullName" th:field="*{custDtl.fullName}"  placeholder="Name As in Adhaar" class="form-control">
+                                          <p class="error" id="error-fullName"></p>
+
+                                      </div>
+                                      <div class="col-sm-6 col-6">
+                                          <input type="text" id="fatherName" th:field="*{custDtl.fatherName}" class="form-control" placeholder="Father's Name">
+                                          <p class="error" id="error-fatherName"></p>
+
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <!-- <label for="email" class="col-sm-3 control-label">Email* </label> -->
+                                      <div class="col-sm-6 col-6">
+                                        <input type="email" id="emailAddress" placeholder="Email" th:field="*{custDtl.emailAddress}" class="form-control" name= "email">
+                                        <p class="error" id="error-emailAddress"></p>
+
+                                      </div>
+                                      <div class="col-sm-6 col-6">
+                                        <input type="date" id="dob" th:field="*{custDtl.dob}" class="form-control">
+                                        <p class="error" id="error-dob"></p>
+
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                      <!-- <label for="phoneNumber" class="col-sm-3 control-label">Adhaar Number*</label> -->
+                                      <div class="col-sm-6 col-6">
+                                        <input type="text" id="adhaarNo" th:field="*{custDtl.adhaarNo}" placeholder="Adhaar Number" class="form-control">
+                                        <p class="error" id="error-adhaarNo"></p>
+
+                                      </div>
+                                      <div class="col-sm-6 col-6">
+                                        <input type="text" id="panNo" th:field="*{custDtl.panNo}" placeholder="PAN Number" class="form-control">
+                                        <p class="error" id="error-panNo"></p>
+
+                                      </div>
+                                  </div>
+
+                              </form>
+                          </div>
+
+                          <!-- ADDRESS INFO FORM -->
+
+                          <div class="card-body">
+                            <div class="form-heading">
+                              <h3 class="card-title">address_info</h3>
+                            </div>
+
+                              <form class="form-horizontal" role="form" >
+
+                                  <div class="form-group row">
+                                      <!-- <label for="firstName" class="col-sm-3 control-label">Full Name*</label> -->
+                                      <div class="col-sm-6 col-6">
+                                        <input type="text" id="addressLine1" th:field="*{addressDtl.addressLine1}" placeholder="Address Line 1" class="form-control">
+                                        <p class="error" id="error-addressLine1"></p>
+
+                                      </div>
+                                      <div class="col-sm-6 col-6">
+                                        <input type="text" id="addressLine2" th:field="*{addressDtl.addressLine2}" placeholder="Address Line 2" class="form-control">
+                                        <p class="error" id="error-addressLine2"></p>
+
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <!-- <label for="email" class="col-sm-3 control-label">Email* </label> -->
+                                      <div class="col-sm-6 col-6">
+                                        <input type="text" id="city" th:field="*{addressDtl.city}" placeholder="City" class="form-control">
+                                        <p class="error" id="error-city"></p>
+
+                                      </div>
+                                      <div class="col-sm-6 col-6">
+                                        <input type="text" id="state" th:field="*{addressDtl.state}" placeholder="State" class="form-control">
+                                        <p class="error" id="error-state"></p>
+
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <!-- <label for="dob" class="col-sm-3 control-label">Date of Birth</label> -->
+
+                                      <div class="cols-sm-10">
+                                        <input type="text" id="zipCode" th:field="*{addressDtl.zipCode}" placeholder="Zip Code" class="form-control">
+                                        <p class="error" id="error-zipCode"></p>
+
+                                      </div>
+                                  </div>
+
+                              </form>
+                          </div>
+
+                          <!-- EMPLOYEMENT INFO FORM -->
+
+                          <div class="card-body">
+                            <div class="form-heading">
+                              <h3 class="card-title">employement_info</h3>
+                            </div>
+
+                              <form class="form-horizontal" role="form" >
+
+                                  <div class="form-group row">
+                                      <!-- <label for="firstName" class="col-sm-3 control-label">Full Name*</label> -->
+                                      <div class="col-sm-6 col-6">
+                                        <select name="employementType" id="employementType" class="custom-select mb-3" placeholder="Employment Type">
+                                          <option selected value=>Please Select Employment Type</option>
+                                          <option value="Business">Business</option>
+                                          <option value="Salaried">Salaried</option>
+                                          <option value="Others">Others</option>
+                                        </select>
+                                      </div>
+
+                                      <div class="col-sm-6 col-6">
+                                        <input type="text" id="empName" th:field="*{employerDtl.employerName}" placeholder="Employer Name" class="form-control">
+                                        <p id="error-empName"></p>
+
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <!-- <label for="email" class="col-sm-3 control-label">Email* </label> -->
+                                      <div class="cols-sm-10">
+                                      <input type="text" id="empAddressLine1" th:field="*{employerDtl.fullAddress}" placeholder="Address Line 1" class="form-control">
+
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <!-- <label for="dob" class="col-sm-3 control-label">Date of Birth</label> -->
+                                      <div class="col-sm-6 col-6">
+                                        <input type="text" id="empCity" th:field="*{employerDtl.city}" placeholder="City" class="form-control">
+                                        <p id="error-empCity"></p>
+
+                                      </div>
+                                      <div class="col-sm-6 col-6">
+                                        <input type="text" id="empState" th:field="*{employerDtl.state}" placeholder="State" class="form-control">
+                                        <p id="error-empState"></p>
+
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                      <!-- <label for="phoneNumber" class="col-sm-3 control-label">PAN Number*</label> -->
+                                      <div class="col-sm-6 col-6">
+                                        <input type="text" id="empZipCode" th:field="*{employerDtl.zipCode}" placeholder="Zip Code" class="form-control">
+                                        <p id="error-empZipCode"></p>
+
+                                      </div>
+                                      <div class="col-sm-6 col-6">
+                                        <input type="phoneNumber" id="empPhoneNumber" th:field="*{employerDtl.employerContactNo}" placeholder="Employer Phone number" class="form-control">
+                                        <p id="error-empPhoneNumber"></p>
+
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                      <!-- <label for="phoneNumber" class="col-sm-3 control-label">PAN Number*</label> -->
+
+                                  </div>
+
+                              </form>
+                          </div>
+
+                          <!-- REFERENCE INFO form -->
+
+                          <div class="card-body">
+                            <div class="form-heading">
+                              <h3 class="card-title">reference_info</h3>
+                            </div>
+
+                              <form class="form-horizontal" role="form" >
+
+                                  <div class="form-group row">
+                                      <!-- <label for="firstName" class="col-sm-3 control-label">Full Name*</label> -->
+                                      <div class="col-sm-6 col-6">
+                                        <input type="text" id="refName1" th:field="*{refDtl.refName1}" placeholder="Reference Name 1" class="form-control">
+                                        <p id="error-refName1"></p>
+
+                                      </div>
+                                      <div class="col-sm-6 col-6">
+                                        <input type="text" id="refName2" th:field="*{refDtl.refName2}" placeholder="Reference Name 2" class="form-control">
+                                        <p id="error-refName2"></p>
+
+                                      </div>
+                                  </div>
+                                  <div class="form-group row">
+                                      <!-- <label for="email" class="col-sm-3 control-label">Email* </label> -->
+                                      <div class="col-sm-6 col-6">
+                                        <input type="text" id="relation1" th:field="*{refDtl.relation1}" placeholder="Reference Relation 1" class="form-control">
+                                        <p id="error-relation1"></p>
+
+                                      </div>
+                                      <div class="col-sm-6 col-6">
+                                        <input type="text" id="relation2" th:field="*{refDtl.relation2}" placeholder="Reference Relation 2" class="form-control">
+                                        <p id="error-relation2"></p>
+
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                      <!-- <label for="phoneNumber" class="col-sm-3 control-label">Adhaar Number*</label> -->
+
+                                      <div class="col-sm-6 col-6">
+                                        <input type="phoneNumber" id="refContactNo1" th:field="*{refDtl.refContactNo1}" placeholder="Reference Phone number 1" class="form-control">
+                                        <p id="error-refContactNo1"></p>
+
+                                      </div>
+                                      <div class="col-sm-6 col-6">
+                                        <input type="phoneNumber" id="refContactNo2" th:field="*{refDtl.refContactNo2}" placeholder="Reference Phone number 2" class="form-control">
+                                        <p id="error-refContactNo2"></p>
+
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                      <!-- <label for="phoneNumber" class="col-sm-3 control-label">PAN Number*</label> -->
+
+                                      <div class="col-sm-6 col-6">
+                                      <input type="text" id="refAddress1" th:field="*{refDtl.refAddress1}" placeholder="Reference Address 1" class="form-control">
+
+                                      </div>
+                                      <div class="col-sm-6 col-6">
+                                        <input type="text" id="refAddress2" th:field="*{refDtl.refAddress2}" placeholder="Reference Address 2" class="form-control">
+
+                                      </div>
+                                  </div>
+
+                              </form>
+                          </div>
+
+                          <!-- document info -->
+
+                          <div class="card-body">
+                            <div class="form-heading">
+                              <h3 class="card-title">document_info</h3>
+                            </div>
+
+
+                          </div>
+
+                          <div class="form-btn">
+                              <button type="button" id = "approveButton" onclick="updateCustomer()" class="btn btn-primary">Update Customer</button>
+                          </div>
+
+                      </div>
+                  </div>
+              </div>
+
+            </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script type="text/javascript">
+	
+	var id = [[${user.id}]];
+	var localCookie = "";
+	var formUrl = window.location;
+	var existingToken = document.cookie.split(';').map(cookie => cookie.split('='))
+	  .reduce((accumulator, [key, value]) => ({ ...accumulator, [key.trim()]: decodeURIComponent(value) }), {});
+	 localCookie = existingToken.authToken;
+	 
+	function updateCustomer () {
+		
+		var formData = {
+				userId : id,
+				fullName : $("#fullName").val(),
+				dob : $("#dob").val(),
+				phoneNo : $("#phoneNo").val(),
+				fatherName : $("#fatherName").val(),
+				gender : $("input[name='gender']:checked").val(),
+				maritalStatus : $("input[name='maritalStatus']:checked").val(),
+				emailAddress : $("#emailAddress").val(),
+				adhaarNo : $("#adhaarNo").val(),
+				panNo : $("#panNo").val(),
+				addressLine1 : $("#addressLine1").val(),
+				addressLine2 : $("#addressLine2").val(),
+				fullAddress : $("#addressLine1").val() + $("#addressLine2").val(),
+				city : $("#city").val(),
+				state : $("#state").val(),
+				zipCode : $("#zipCode").val(),
+				employerName : $("#empName").val(),
+				employerContactNo : $("#empPhoneNumber").val(),
+				employerType : $('#employementType :selected').val(),
+				fullAddress :	$("#empAddressLine1").val(),
+				income : $("#income").val(),
+				city : $("#empCity").val(),
+				state : $("#empState").val(),
+				zipCode : $("#empZipCode").val(),
+				refName1 : $("#refName1").val(),
+				refContactNo1 : $("#refContactNo1").val(),
+				relation1 : $("#relation1").val(),
+				refAddress1 : $("#refAddress1").val(),
+				refName2 : $("#refName2").val(),
+				refContactNo2 : $("#refContactNo2").val(),
+				relation2 : $("#relation2").val(),
+				refAddress2 : $("#refAddress2").val()
+			}
+		
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			headers: {"Authorization": localCookie},
+			url : "/account/edit",
+			data : JSON.stringify(formData),
+			dataType : 'json',
+			success : function(result) {
+				if (result.status == "success") {} else {}
+				console.log(result);
+			},
+			error : function(e) {
+				/* alert("Error!") */
+				console.log("ERROR: ", e);
+			}
+		});
+	}
+	
+	
+	</script>
+
+
+</body>
+</html>
